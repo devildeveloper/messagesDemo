@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js">
+
+    </script>
+    <script type="text/javascript">
+      var server=io.connect("http://infinite-ocean-41528.herokuapp.com");
+      server.on('err',function(err){
+        console.log(err.message);
+      })
+      server.on('success',function(ok){
+        console.log(ok.message);
+      })
+      server.on('notification',function(message){
+        console.log(message)
+      })
+      server.emit('join',{group:'room:2'});
+      function sendNotification(){
+        server.emit('broadcast',{group:'room:2',message:'holi'});
+      }
+    </script>
+  </body>
+</html>
